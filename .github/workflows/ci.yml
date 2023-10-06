@@ -1,0 +1,23 @@
+name: PowerPlanManager CI
+
+on: push
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+
+    - name: Configure CMake
+      shell: cmd
+      run: |
+        cmake -G "Visual Studio 17 2022" -A x64 .
+
+    - name: Build
+      shell: cmd
+      run: cmake --build . --config Release
