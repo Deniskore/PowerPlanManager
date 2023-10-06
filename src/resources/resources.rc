@@ -1,0 +1,15 @@
+#include <windows.h>
+#include <commctrl.h>
+#include "../resources.h"
+
+IDI_ICON1 ICON "icon.ico"
+IDR_WAVE1 WAVE "sound.wav"
+
+IDD_CUSTOM_DIALOG DIALOGEX 0, 0, 200, 60
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+FONT 10, "MS Shell Dlg"
+BEGIN
+    CONTROL "", IDC_SLIDER, TRACKBAR_CLASS, TBS_HORZ, 20, 20, 160, 15
+    LTEXT "", IDC_SLIDER_VALUE, 20, 5, 160, 12
+END
+

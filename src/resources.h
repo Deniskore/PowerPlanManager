@@ -1,0 +1,7 @@
+#pragma once
+
+#define IDI_ICON1 1001
+#define IDD_CUSTOM_DIALOG 1002
+#define IDC_SLIDER 1003
+#define IDC_SLIDER_VALUE 1004
+#define IDR_WAVE1 1005
