@@ -91,10 +91,12 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
   Shell_NotifyIcon(NIM_ADD, &nid);
 
   std::atomic<bool> pauseCFGWatcher(false);
-  std::jthread monitoringThread(Monitoring::MonitoringThread, cfg, std::ref(pauseCFGWatcher));
+  std::jthread monitoringThread(Monitoring::MonitoringThread, cfg,
+                                std::ref(pauseCFGWatcher));
   monitoringThread.detach();
 
-  std::jthread cfgMonitoringThread(Monitoring::CFGMonitoringThread, cfg, std::ref(pauseCFGWatcher));
+  std::jthread cfgMonitoringThread(Monitoring::CFGMonitoringThread, cfg,
+                                   std::ref(pauseCFGWatcher));
   cfgMonitoringThread.detach();
 
   // Process window messages.

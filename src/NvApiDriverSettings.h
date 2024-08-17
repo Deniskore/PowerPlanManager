@@ -1,27 +1,28 @@
-/*****************************************************************************\
-|*                                                                             *|
-|* Copyright (c) 2019-2022, NVIDIA CORPORATION. All rights reserved.           *|
-|*                                                                             *|
-|* Permission is hereby granted, free of charge, to any person obtaining a     *|
-|* copy of this software and associated documentation files (the "Software"),  *|
-|* to deal in the Software without restriction, including without limitation   *|
-|* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *|
-|* and/or sell copies of the Software, and to permit persons to whom the       *|
-|* Software is furnished to do so, subject to the following conditions:        *|
-|*                                                                             *|
-|* The above copyright notice and this permission notice shall be included in  *|
-|* all copies or substantial portions of the Software.                         *|
-|*                                                                             *|
-|* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *|
-|* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *|
-|* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL    *|
-|* THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER  *|
-|* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *|
-|* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *|
-|* DEALINGS IN THE SOFTWARE.                                                   *|
-|*                                                                             *|
-|*                                                                             *|
-\*****************************************************************************/
+/*********************************************************************************************************\
+|*                                                                                                        *|
+|* SPDX-FileCopyrightText: Copyright (c) 2019-2024 NVIDIA CORPORATION & AFFILIATES. All rights reserved.  *|
+|* SPDX-License-Identifier: MIT                                                                           *|
+|*                                                                                                        *|
+|* Permission is hereby granted, free of charge, to any person obtaining a                                *|
+|* copy of this software and associated documentation files (the "Software"),                             *|
+|* to deal in the Software without restriction, including without limitation                              *|
+|* the rights to use, copy, modify, merge, publish, distribute, sublicense,                               *|
+|* and/or sell copies of the Software, and to permit persons to whom the                                  *|
+|* Software is furnished to do so, subject to the following conditions:                                   *|
+|*                                                                                                        *|
+|* The above copyright notice and this permission notice shall be included in                             *|
+|* all copies or substantial portions of the Software.                                                    *|
+|*                                                                                                        *|
+|* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR                             *|
+|* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,                               *|
+|* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL                               *|
+|* THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER                             *|
+|* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING                                *|
+|* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER                                    *|
+|* DEALINGS IN THE SOFTWARE.                                                                              *|
+|*                                                                                                        *|
+|*                                                                                                        *|
+\*********************************************************************************************************/
 
 #ifndef _NVAPI_DRIVER_SETTINGS_H_
 #define _NVAPI_DRIVER_SETTINGS_H_
@@ -43,7 +44,6 @@
 #define OGL_OVERLAY_SUPPORT_STRING                 L"Enable overlay"
 #define OGL_QUALITY_ENHANCEMENTS_STRING            L"High level control of the rendering quality on OpenGL"
 #define OGL_SINGLE_BACKDEPTH_BUFFER_STRING         L"Unified back/depth buffer"
-#define OGL_SLI_CFR_MODE_STRING                    L"Set CFR mode"
 #define OGL_SLI_MULTICAST_STRING                   L"Enable NV_gpu_multicast extension"
 #define OGL_THREAD_CONTROL_STRING                  L"Threaded optimization"
 #define OGL_TMON_LEVEL_STRING                      L"Event Log Tmon Severity Threshold"
@@ -60,6 +60,8 @@
 #define ANSEL_ALLOW_STRING                         L"NVIDIA Predefined Ansel Usage"
 #define ANSEL_ALLOWLISTED_STRING                   L"Ansel flags for enabled applications"
 #define ANSEL_ENABLE_STRING                        L"Enable Ansel"
+#define APPIDLE_DYNAMIC_FRL_FPS_STRING             L"Idle Application Max FPS Limit"
+#define APPIDLE_DYNAMIC_FRL_THRESHOLD_TIME_STRING  L"Idle Application Threshold Time out in seconds"
 #define APPLICATION_PROFILE_NOTIFICATION_TIMEOUT_STRING L"Application Profile Notification Popup Timeout"
 #define APPLICATION_STEAM_ID_STRING                L"Steam Application ID"
 #define BATTERY_BOOST_APP_FPS_STRING               L"Battery Boost Application FPS"
@@ -101,7 +103,6 @@
 #define VSYNC_BEHAVIOR_FLAGS_STRING                L"Vsync - Behavior Flags"
 #define WKS_API_STEREO_EYES_EXCHANGE_STRING        L"Stereo - Swap eyes"
 #define WKS_API_STEREO_MODE_STRING                 L"Stereo - Display mode"
-#define WKS_MEMORY_ALLOCATION_POLICY_STRING        L"Memory Allocation Policy"
 #define WKS_STEREO_DONGLE_SUPPORT_STRING           L"Stereo - Dongle Support"
 #define WKS_STEREO_SUPPORT_STRING                  L"Stereo - Enable"
 #define WKS_STEREO_SWAP_MODE_STRING                L"Stereo - swap mode"
@@ -114,6 +115,7 @@
 #define MAXWELL_B_SAMPLE_INTERLEAVE_STRING         L"Enable sample interleaving (MFAA)"
 #define PRERENDERLIMIT_STRING                      L"Maximum pre-rendered frames"
 #define PS_SHADERDISKCACHE_STRING                  L"Shader Cache"
+#define PS_SHADERDISKCACHE_DLL_PATH_WCHAR_STRING   L"shader cache path to dll"
 #define PS_SHADERDISKCACHE_MAX_SIZE_STRING         L"Shader disk cache maximum size"
 #define PS_TEXFILTER_ANISO_OPTS2_STRING            L"Texture filtering - Anisotropic sample optimization"
 #define PS_TEXFILTER_BILINEAR_IN_ANISO_STRING      L"Texture filtering - Anisotropic filter optimization"
@@ -145,7 +147,6 @@ enum ESetting {
     OGL_OVERLAY_SUPPORT_ID                        = 0x206C28C4,
     OGL_QUALITY_ENHANCEMENTS_ID                   = 0x20797D6C,
     OGL_SINGLE_BACKDEPTH_BUFFER_ID                = 0x20A29055,
-    OGL_SLI_CFR_MODE_ID                           = 0x20343843,
     OGL_SLI_MULTICAST_ID                          = 0x2092D3BE,
     OGL_THREAD_CONTROL_ID                         = 0x20C1221E,
     OGL_TMON_LEVEL_ID                             = 0x202888C1,
@@ -162,6 +163,8 @@ enum ESetting {
     ANSEL_ALLOW_ID                                = 0x1035DB89,
     ANSEL_ALLOWLISTED_ID                          = 0x1085DA8A,
     ANSEL_ENABLE_ID                               = 0x1075D972,
+    APPIDLE_DYNAMIC_FRL_FPS_ID                    = 0x10835016,
+    APPIDLE_DYNAMIC_FRL_THRESHOLD_TIME_ID         = 0x10835017,
     APPLICATION_PROFILE_NOTIFICATION_TIMEOUT_ID   = 0x104554B6,
     APPLICATION_STEAM_ID_ID                       = 0x107CDDBC,
     BATTERY_BOOST_APP_FPS_ID                      = 0x10115C8C,
@@ -203,7 +206,6 @@ enum ESetting {
     VSYNC_BEHAVIOR_FLAGS_ID                       = 0x10FDEC23,
     WKS_API_STEREO_EYES_EXCHANGE_ID               = 0x11AE435C,
     WKS_API_STEREO_MODE_ID                        = 0x11E91A61,
-    WKS_MEMORY_ALLOCATION_POLICY_ID               = 0x11112233,
     WKS_STEREO_DONGLE_SUPPORT_ID                  = 0x112493BD,
     WKS_STEREO_SUPPORT_ID                         = 0x11AA9E99,
     WKS_STEREO_SWAP_MODE_ID                       = 0x11333333,
@@ -216,6 +218,7 @@ enum ESetting {
     MAXWELL_B_SAMPLE_INTERLEAVE_ID                = 0x0098C1AC,
     PRERENDERLIMIT_ID                             = 0x007BA09E,
     PS_SHADERDISKCACHE_ID                         = 0x00198FFF,
+    PS_SHADERDISKCACHE_DLL_PATH_WCHAR_ID          = 0x0019A002,
     PS_SHADERDISKCACHE_MAX_SIZE_ID                = 0x00AC8497,
     PS_TEXFILTER_ANISO_OPTS2_ID                   = 0x00E73211,
     PS_TEXFILTER_BILINEAR_IN_ANISO_ID             = 0x0084CD70,
@@ -229,8 +232,8 @@ enum ESetting {
     VSYNCMODE_ID                                  = 0x00A879CF,
     VSYNCTEARCONTROL_ID                           = 0x005A375C,
     TOTAL_DWORD_SETTING_NUM = 96,
-    TOTAL_WSTRING_SETTING_NUM = 4,
-    TOTAL_SETTING_NUM = 100,
+    TOTAL_WSTRING_SETTING_NUM = 5,
+    TOTAL_SETTING_NUM = 101,
     INVALID_SETTING_ID = 0xFFFFFFFF
 };
 
@@ -355,14 +358,6 @@ enum EValues_OGL_SINGLE_BACKDEPTH_BUFFER {
     OGL_SINGLE_BACKDEPTH_BUFFER_USE_HW_DEFAULT           = 0xffffffff,
     OGL_SINGLE_BACKDEPTH_BUFFER_NUM_VALUES = 3,
     OGL_SINGLE_BACKDEPTH_BUFFER_DEFAULT = OGL_SINGLE_BACKDEPTH_BUFFER_DISABLE
-};
-
-enum EValues_OGL_SLI_CFR_MODE {
-    OGL_SLI_CFR_MODE_DISABLE                             = 0x00,
-    OGL_SLI_CFR_MODE_ENABLE                              = 0x01,
-    OGL_SLI_CFR_MODE_CLASSIC_SFR                         = 0x02,
-    OGL_SLI_CFR_MODE_NUM_VALUES = 3,
-    OGL_SLI_CFR_MODE_DEFAULT = OGL_SLI_CFR_MODE_DISABLE
 };
 
 enum EValues_OGL_SLI_MULTICAST {
@@ -948,14 +943,6 @@ enum EValues_WKS_API_STEREO_MODE {
     WKS_API_STEREO_MODE_DEFAULT_GL                       = 3,
     WKS_API_STEREO_MODE_NUM_VALUES = 25,
     WKS_API_STEREO_MODE_DEFAULT = WKS_API_STEREO_MODE_SHUTTER_GLASSES
-};
-
-enum EValues_WKS_MEMORY_ALLOCATION_POLICY {
-    WKS_MEMORY_ALLOCATION_POLICY_AS_NEEDED               = 0x0,
-    WKS_MEMORY_ALLOCATION_POLICY_MODERATE_PRE_ALLOCATION = 0x1,
-    WKS_MEMORY_ALLOCATION_POLICY_AGGRESSIVE_PRE_ALLOCATION = 0x2,
-    WKS_MEMORY_ALLOCATION_POLICY_NUM_VALUES = 3,
-    WKS_MEMORY_ALLOCATION_POLICY_DEFAULT = WKS_MEMORY_ALLOCATION_POLICY_AS_NEEDED
 };
 
 enum EValues_WKS_STEREO_DONGLE_SUPPORT {
