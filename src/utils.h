@@ -6,68 +6,52 @@
 #include "constants.h"
 #include "resources.h"
 
-class ModuleHandle
-{
+class ModuleHandle {
 public:
-    explicit ModuleHandle() noexcept
-        : handle(nullptr) {}
-    explicit ModuleHandle(const wchar_t* dllPath)
-        : handle(LoadLibrary(dllPath)) {}
-    ModuleHandle(const ModuleHandle& other) = delete;
-    ModuleHandle& operator=(const ModuleHandle& other) = delete;
+  explicit ModuleHandle() noexcept : handle(nullptr) {}
+  explicit ModuleHandle(const wchar_t *dllPath)
+      : handle(LoadLibrary(dllPath)) {}
+  ModuleHandle(const ModuleHandle &other) = delete;
+  ModuleHandle &operator=(const ModuleHandle &other) = delete;
 
-    ModuleHandle(ModuleHandle&& other) noexcept
-        : handle(other.handle)
-    {
-        other.handle = nullptr;
+  ModuleHandle(ModuleHandle &&other) noexcept : handle(other.handle) {
+    other.handle = nullptr;
+  }
+
+  ModuleHandle &operator=(ModuleHandle &&other) noexcept {
+    if (this != &other) {
+      if (handle)
+        FreeLibrary(handle);
+      handle = other.handle;
+      other.handle = nullptr;
     }
+    return *this;
+  }
 
-    ModuleHandle& operator=(ModuleHandle&& other) noexcept
-    {
-        if (this != &other)
-        {
-            if (handle)
-                FreeLibrary(handle);
-            handle = other.handle;
-            other.handle = nullptr;
-        }
-        return *this;
+  ~ModuleHandle() {
+    if (handle) {
+      FreeLibrary(handle);
     }
+  }
 
-    ~ModuleHandle()
-    {
-        if (handle)
-        {
-            FreeLibrary(handle);
-        }
-    }
-
-    [[nodiscard]] HMODULE get() const { return handle; }
+  [[nodiscard]] HMODULE get() const { return handle; }
 
 private:
-    HMODULE handle;
+  HMODULE handle;
 };
 
-class Utils {
-public:
-  Utils() = delete;
-  ~Utils() = delete;
-  Utils(const Utils &) = delete;
-  Utils(Utils &&) = delete;
-  Utils &operator=(Utils &&) = delete;
-  Utils &operator=(const Utils &) = delete;
+namespace Utils {
+  std::wstring GetAppDataPath();
+  void PlayBubbleSound();
 
-  static std::wstring GetAppDataPath();
-  static void PlayBubbleSound();
+  bool IsFullScreen(HWND window);
+  bool IsD3D();
 
-  static bool IsFullScreen(HWND window);
-  static bool IsD3D();
-
-  static bool CheckAdministratorToken(PSID *ppAdministratorsGroup,
-                                      BOOL *pfIsRunAsAdmin);
-  static bool IsAdministrator();
-  static void ManageAutoStartup(bool autostartup);
-  static bool AddToStartup(const std::wstring &programPath);
-  static bool RemoveFromStartup();
-  static std::wstring GetExecutablePath();
-};
+  bool CheckAdministratorToken(PSID *ppAdministratorsGroup,
+                               BOOL *pfIsRunAsAdmin);
+  bool IsAdministrator();
+  void ManageAutoStartup(bool autostartup);
+  bool AddToStartup(const std::wstring &programPath);
+  bool RemoveFromStartup();
+  std::wstring GetExecutablePath();
+}; // namespace Utils

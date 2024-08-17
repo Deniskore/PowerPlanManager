@@ -170,24 +170,15 @@ enum GPULatencyType {
   Ultra = 2,
 };
 
-class GPU {
-public:
-  GPU() = delete;
-  ~GPU() = delete;
-  GPU(const GPU &) = delete;
-  GPU(GPU &&) = delete;
-  GPU &operator=(GPU &&) = delete;
-  GPU &operator=(const GPU &) = delete;
+namespace GPU {
 
-  static NvAPI_Status ToggleNvidiaPerformanceMode(bool enablePerformanceMode);
-  static NvAPI_Status ToggleNvidiaAnsel(bool enableAnsel);
-  static NvAPI_Status ToggleNvidiaVsync(bool enableVsync);
-  static NvAPI_Status ToggleNvidiaLowLatencyMode(bool enableLowLatencyMode);
-  static NvAPI_Status
-  ToggleNvidiaUltraLowLatencyMode(bool enableUltraLowLatencyMode);
-  static NvAPI_Status NvidiaLowLatencyModeCPL(GPULatencyType latencyState);
-  static NvAPI_Status NvidiaSetDigitalVibrance(int desiredDVLevel);
+  NvAPI_Status ToggleNvidiaPerformanceMode(bool enablePerformanceMode);
+  NvAPI_Status ToggleNvidiaAnsel(bool enableAnsel);
+  NvAPI_Status ToggleNvidiaVsync(bool enableVsync);
+  NvAPI_Status ToggleNvidiaLowLatencyMode(bool enableLowLatencyMode);
+  NvAPI_Status ToggleNvidiaUltraLowLatencyMode(bool enableUltraLowLatencyMode);
+  NvAPI_Status NvidiaLowLatencyModeCPL(GPULatencyType latencyState);
+  NvAPI_Status NvidiaSetDigitalVibrance(int desiredDVLevel);
 
-private:
-  static NvAPI_Status NvidiaMaxPrerenderedFrames(int maxPrerenderedFrames);
-};
+  NvAPI_Status NvidiaMaxPrerenderedFrames(int maxPrerenderedFrames);
+}; // namespace GPU

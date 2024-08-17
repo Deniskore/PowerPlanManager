@@ -1,27 +1,29 @@
-/*****************************************************************************\
-|*                                                                             *|
-|* Copyright (c) 2019-2023, NVIDIA CORPORATION. All rights reserved.           *|
-|*                                                                             *|
-|* Permission is hereby granted, free of charge, to any person obtaining a     *|
-|* copy of this software and associated documentation files (the "Software"),  *|
-|* to deal in the Software without restriction, including without limitation   *|
-|* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *|
-|* and/or sell copies of the Software, and to permit persons to whom the       *|
-|* Software is furnished to do so, subject to the following conditions:        *|
-|*                                                                             *|
-|* The above copyright notice and this permission notice shall be included in  *|
-|* all copies or substantial portions of the Software.                         *|
-|*                                                                             *|
-|* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *|
-|* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *|
-|* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL    *|
-|* THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER  *|
-|* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *|
-|* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *|
-|* DEALINGS IN THE SOFTWARE.                                                   *|
-|*                                                                             *|
-|*                                                                             *|
-\*****************************************************************************/
+/*********************************************************************************************************\
+|*                                                                                                        *|
+|* SPDX-FileCopyrightText: Copyright (c) 2019-2024 NVIDIA CORPORATION & AFFILIATES. All rights reserved.  *|
+|* SPDX-License-Identifier: MIT                                                                           *|
+|*                                                                                                        *|
+|* Permission is hereby granted, free of charge, to any person obtaining a                                *|
+|* copy of this software and associated documentation files (the "Software"),                             *|
+|* to deal in the Software without restriction, including without limitation                              *|
+|* the rights to use, copy, modify, merge, publish, distribute, sublicense,                               *|
+|* and/or sell copies of the Software, and to permit persons to whom the                                  *|
+|* Software is furnished to do so, subject to the following conditions:                                   *|
+|*                                                                                                        *|
+|* The above copyright notice and this permission notice shall be included in                             *|
+|* all copies or substantial portions of the Software.                                                    *|
+|*                                                                                                        *|
+|* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR                             *|
+|* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,                               *|
+|* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL                               *|
+|* THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER                             *|
+|* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING                                *|
+|* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER                                    *|
+|* DEALINGS IN THE SOFTWARE.                                                                              *|
+|*                                                                                                        *|
+|*                                                                                                        *|
+\*********************************************************************************************************/
+
 #ifndef _NVAPI_INTERFACE_H
 #define _NVAPI_INTERFACE_H
 
@@ -115,7 +117,11 @@ static std::map<std::string, uint32_t> nvapi_interface_table =
     { "NvAPI_GPU_GetVirtualizationInfo", 0x44e022a9 },
     { "NvAPI_GPU_GetLogicalGpuInfo", 0x842b066e },
     { "NvAPI_GPU_GetLicensableFeatures", 0x3fc596aa },
+    { "NvAPI_GPU_NVLINK_GetCaps", 0xbef1119d },
+    { "NvAPI_GPU_NVLINK_GetStatus", 0xc72a38e3 },
+    { "NvAPI_GPU_GetGPUInfo", 0xafd1b02c },
     { "NvAPI_GPU_GetVRReadyData", 0x81d629c5 },
+    { "NvAPI_GPU_GetGspFeatures", 0x581c4391 },
     { "NvAPI_GPU_GetPerfDecreaseInfo", 0x7f7f4600 },
     { "NvAPI_GPU_GetPstatesInfoEx", 0x843c0256 },
     { "NvAPI_GPU_GetPstates20", 0x6ff81213 },
@@ -179,6 +185,7 @@ static std::map<std::string, uint32_t> nvapi_interface_table =
     { "NvAPI_DISP_GetGDIPrimaryDisplayId", 0x1e9d8a31 },
     { "NvAPI_DISP_GetDisplayConfig", 0x11abccf8 },
     { "NvAPI_DISP_SetDisplayConfig", 0x5d8cf8de },
+    { "NvAPI_DISP_GetEdidData", 0x436ced76 },
     { "NvAPI_DISP_GetAdaptiveSyncData", 0xb73d1ee9 },
     { "NvAPI_DISP_SetAdaptiveSyncData", 0x3eebba1d },
     { "NvAPI_DISP_GetVirtualRefreshRateData", 0x8c00429a },
@@ -188,6 +195,8 @@ static std::map<std::string, uint32_t> nvapi_interface_table =
     { "NvAPI_DISP_GetNvManagedDedicatedDisplays", 0xdbdf0cb2 },
     { "NvAPI_DISP_AcquireDedicatedDisplay", 0x47c917ba },
     { "NvAPI_DISP_ReleaseDedicatedDisplay", 0x1247825f },
+    { "NvAPI_DISP_GetNvManagedDedicatedDisplayMetadata", 0xd645d80c },
+    { "NvAPI_DISP_SetNvManagedDedicatedDisplayMetadata", 0x3d8b129a },
     { "NvAPI_Disp_GetDisplayIdInfo", 0xbae8aa5e },
     { "NvAPI_Disp_GetDisplayIdsFromTarget", 0xe7e5f89e },
     { "NvAPI_Disp_GetVRRInfo", 0xdf8fda57 },
@@ -357,11 +366,15 @@ static std::map<std::string, uint32_t> nvapi_interface_table =
     { "NvAPI_D3D_SetLatencyMarker", 0xd9984c05 },
     { "NvAPI_D3D12_SetAsyncFrameMarker", 0x13c98f73 },
     { "NvAPI_D3D12_NotifyOutOfBandCommandQueue", 0x03d6e8cb },
+    { "NvAPI_D3D12_SetCreateCommandQueueLowLatencyHint", 0x548c224f },
+    { "NvAPI_D3D12_CreateCubinComputeShaderExV2", 0x299f5fdc },
     { "NvAPI_D3D12_CreateCubinComputeShader", 0x2a2c79e8 },
     { "NvAPI_D3D12_CreateCubinComputeShaderEx", 0x3151211b },
     { "NvAPI_D3D12_CreateCubinComputeShaderWithName", 0x1dc7261f },
     { "NvAPI_D3D12_LaunchCubinShader", 0x5c52bb86 },
     { "NvAPI_D3D12_DestroyCubinComputeShader", 0x7fb785ba },
+    { "NvAPI_D3D12_GetCudaMergedTextureSamplerObject", 0x329fe6e0 },
+    { "NvAPI_D3D12_GetCudaIndependentDescriptorObject", 0x0ddac234 },
     { "NvAPI_D3D12_GetCudaTextureObject", 0x80403fc9 },
     { "NvAPI_D3D12_GetCudaSurfaceObject", 0x48f5b2ee },
     { "NvAPI_D3D12_IsFatbinPTXSupported", 0x70c07832 },
@@ -384,6 +397,10 @@ static std::map<std::string, uint32_t> nvapi_interface_table =
     { "NvAPI_D3D11_GetCudaTextureObject", 0x9006fa68 },
     { "NvAPI_D3D11_GetResourceGPUVirtualAddress", 0x1819b423 },
     { "NvAPI_D3D12_GetRaytracingCaps", 0x85a6c2a0 },
+    { "NvAPI_D3D12_EnableRaytracingValidation", 0x1de5991b },
+    { "NvAPI_D3D12_RegisterRaytracingValidationMessageCallback", 0x8554eb38 },
+    { "NvAPI_D3D12_UnregisterRaytracingValidationMessageCallback", 0x26975da6 },
+    { "NvAPI_D3D12_FlushRaytracingValidationMessages", 0xb8fb1fcb },
     { "NvAPI_D3D12_GetRaytracingDisplacementMicromapArrayPrebuildInfo", 0xfa99b6de },
     { "NvAPI_D3D12_GetRaytracingOpacityMicromapArrayPrebuildInfo", 0x4726d180 },
     { "NvAPI_D3D12_SetCreatePipelineStateOptions", 0x5c607a27 },
@@ -502,6 +519,8 @@ static std::map<std::string, uint32_t> nvapi_interface_table =
     { "NvAPI_SYS_GetGpuAndOutputIdFromDisplayId", 0x112ba1a5 },
     { "NvAPI_SYS_GetPhysicalGpuFromDisplayId", 0x9ea74659 },
     { "NvAPI_SYS_GetDisplayDriverInfo", 0x721faceb },
+    { "NvAPI_SYS_GetPhysicalGPUs", 0xd3b24d2d },
+    { "NvAPI_SYS_GetLogicalGPUs", 0xccfffc10 },
     { "NvAPI_GPU_ClientRegisterForUtilizationSampleUpdates", 0xadeeaf67 },
 };
 

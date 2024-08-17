@@ -5,14 +5,18 @@ void ApplySettings() {
   auto cfg = Config::ReadConfig();
 
   if (cfg->alwaysVibranceLevel) {
-    GPU::NvidiaSetDigitalVibrance(cfg->digitalVibranceLevel.load(std::memory_order_relaxed));
+    GPU::NvidiaSetDigitalVibrance(
+        cfg->digitalVibranceLevel.load(std::memory_order_relaxed));
   }
 
-  GPU::ToggleNvidiaPerformanceMode(cfg->nvidiaPerformanceMode.load(std::memory_order_relaxed));
+  GPU::ToggleNvidiaPerformanceMode(
+      cfg->nvidiaPerformanceMode.load(std::memory_order_relaxed));
   GPU::ToggleNvidiaAnsel(cfg->nvidiaAnsel.load(std::memory_order_relaxed));
   GPU::ToggleNvidiaVsync(cfg->nvidiaVsync.load(std::memory_order_relaxed));
-  GPU::ToggleNvidiaLowLatencyMode(cfg->nvidiaLowLatencyMode.load(std::memory_order_relaxed));
-  GPU::ToggleNvidiaUltraLowLatencyMode(cfg->nvidiaUltraLowLatencyMode.load(std::memory_order_relaxed));
+  GPU::ToggleNvidiaLowLatencyMode(
+      cfg->nvidiaLowLatencyMode.load(std::memory_order_relaxed));
+  GPU::ToggleNvidiaUltraLowLatencyMode(
+      cfg->nvidiaUltraLowLatencyMode.load(std::memory_order_relaxed));
 }
 
 void ShowContextMenu(HWND hWnd, SharedWindowData *data) {
